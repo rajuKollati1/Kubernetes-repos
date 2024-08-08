@@ -5,10 +5,16 @@ metadata:
   namespace: default
 data:
   nginx.conf: |
+    http {
     server {
-      listen 80;
-      location / {
-        root /usr/share/nginx/html;
-        index index.html;
-      }
+        listen 80;
+        server_name example.com;
+        
+        location / {
+            root /usr/share/nginx/html;
+            index index.html index.htm;
+        }
     }
+}
+
+
