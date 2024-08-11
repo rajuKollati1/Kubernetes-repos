@@ -1,0 +1,59 @@
+# Project Management
+gcloud projects list
+gcloud projects describe <project-id>
+gcloud config set project <project-id>
+
+# Compute Engine
+gcloud compute instances list
+gcloud compute instances describe <instance-name> --zone=<zone>
+gcloud compute instances start <instance-name> --zone=<zone>
+gcloud compute instances stop <instance-name> --zone=<zone>
+gcloud compute instances delete <instance-name> --zone=<zone>
+
+# Kubernetes Engine
+gcloud container clusters list
+gcloud container clusters describe <cluster-name> --zone=<zone>
+gcloud container clusters get-credentials <cluster-name> --zone=<zone>
+gcloud container clusters create <cluster-name> --zone=<zone> --num-nodes=<number-of-nodes>
+gcloud container clusters delete <cluster-name> --zone=<zone>
+
+# Cloud Storage
+gcloud storage buckets list
+gcloud storage buckets describe <bucket-name>
+gcloud storage buckets create <bucket-name> --location=<location>
+gcloud storage buckets delete <bucket-name>
+gcloud storage cp <local-file> gs://<bucket-name>/
+gcloud storage cp gs://<bucket-name>/<file> <local-destination>
+
+# BigQuery
+gcloud bigquery datasets list
+gcloud bigquery datasets describe <dataset-id>
+gcloud bigquery tables list --dataset-id=<dataset-id>
+gcloud bigquery query 'SELECT * FROM `<project-id>.<dataset-id>.<table-id>` LIMIT 10'
+
+# Cloud SQL
+gcloud sql instances list
+gcloud sql instances describe <instance-name>
+gcloud sql instances create <instance-name> --tier=<tier> --region=<region>
+gcloud sql instances delete <instance-name>
+
+# IAM & Service Accounts
+gcloud iam roles list
+gcloud iam service-accounts list
+gcloud iam service-accounts describe <service-account-email>
+gcloud iam service-accounts create <service-account-name> --display-name="<display-name>"
+gcloud iam service-accounts delete <service-account-email>
+
+# Networking
+gcloud compute firewall-rules list
+gcloud compute firewall-rules describe <firewall-rule-name>
+gcloud compute firewall-rules create <firewall-rule-name> --allow <protocol>:<ports> --source-ranges <source-ranges>
+gcloud compute firewall-rules delete <firewall-rule-name>
+
+# Other Useful Commands
+gcloud projects get-iam-policy <project-id>
+gcloud services enable <api-name>
+gcloud services disable <api-name>
+gcloud compute regions describe <region>
+gcloud config set compute/region <region>
+gcloud config set compute/zone <zone>
