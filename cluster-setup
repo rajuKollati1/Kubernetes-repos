@@ -11,7 +11,7 @@ VPC_NAME="rk-myvpc"
 SUBNET_NAME="rk-subnet001"
 NETWORK_RANGE="10.15.0.0/16"
 REGION="us-central1"
-NODE_LABEL="namespace=rk-lable-nodes"
+NODE_LABEL="namespace=rk-lable-nodes01"
 
 # Set the project
 gcloud config set project $PROJECT_ID
