@@ -1,0 +1,42 @@
+#!/bin/bash
+
+# Variables
+PROJECT_ID="golden-totality-429517-s7"
+COMPUTE_ZONE="us-central1-a"
+CLUSTER_NAME="rk-cluster002"
+NUM_NODES=2
+NODE_NAME_PREFIX="rk-node001"
+MACHINE_TYPE="e2-medium"
+VPC_NAME="rk-myvpc"
+SUBNET_NAME="rk-subnet001"
+NETWORK_RANGE="10.15.0.0/16"
+REGION="us-central1"
+NODE_LABEL="namespace=rk-lable-nodes"
+
+# Set the project
+gcloud config set project $PROJECT_ID
+
+# Set the compute zone
+gcloud config set compute/zone $COMPUTE_ZONE
+
+# Enable required services
+gcloud services enable container.googleapis.com
+
+# Create the GKE cluster
+gcloud container clusters create $CLUSTER_NAME \
+  --zone $COMPUTE_ZONE \
+  --num-nodes $NUM_NODES \
+  --machine-type $MACHINE_TYPE \
+  --network $VPC_NAME \
+  --subnetwork $SUBNET_NAME \
+  --enable-ip-alias \
+  --max-pods-per-node $MAX_PODS_PER_NODE \
+  --labels $NODE_LABEL \
+  --logging SYSTEM,WORKLOAD \
+  --disk-type pd-standard \
+  --disk-size 70 \
+  --node-locations $COMPUTE_ZONE \
+  --metadata disable-legacy-endpoints=true
+
+# Get credentials for kubectl
+gcloud container clusters get-credentials $CLUSTER_NAME --zone $COMPUTE_ZONE
