@@ -1,0 +1,46 @@
+# Cluster Information
+kubectl cluster-info
+kubectl get nodes
+kubectl get namespaces
+
+# Pod Management
+kubectl get pods
+kubectl get pods -n <namespace>
+kubectl describe pod <pod-name>
+kubectl delete pod <pod-name>
+
+# Deployment Management
+kubectl get deployments
+kubectl describe deployment <deployment-name>
+kubectl scale deployment <deployment-name> --replicas=<number-of-replicas>
+kubectl apply -f <file.yaml>
+kubectl delete deployment <deployment-name>
+
+# Service Management
+kubectl get services
+kubectl describe service <service-name>
+kubectl delete service <service-name>
+
+# Config and Secrets
+kubectl get configmaps
+kubectl describe configmap <configmap-name>
+kubectl get secrets
+kubectl describe secret <secret-name>
+
+# Logs and Troubleshooting
+kubectl logs <pod-name>
+kubectl logs <pod-name> -c <container-name>
+kubectl exec -it <pod-name> -- /bin/bash
+
+# Other Useful Commands
+kubectl get resourcequotas
+kubectl get events
+kubectl api-resources
+kubectl get pods --watch
+kubectl config get-contexts
+kubectl config current-context
+
+# Examples
+kubectl get pods -o wide
+kubectl apply -f deployment.yaml
+kubectl top pods
