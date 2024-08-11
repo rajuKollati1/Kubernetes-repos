@@ -1,0 +1,2 @@
+kubectl logs <pod-name> -c <container-name>
+kubectl logs nginx-deployment-5f8fc79b6f-mvbnj -c  nginx
