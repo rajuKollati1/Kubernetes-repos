@@ -1,4 +1,4 @@
-apiversion: apps/v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: ngix-deployment
@@ -7,8 +7,8 @@ metadata:
 spec:
   replicas: 2
   selector:
-     matchLabels:
-       app: nginx
+    matchLabels:
+      app: nginx
    template:
      metadata:
        labels:
@@ -23,18 +23,18 @@ spec:
                   operator: In
                   values:
                   -nginx
-               topologykey: kubernetes.io/hostname
+               topologyKey: kubernetes.io/hostname
          Containers:
-         -name: nginx
-          image: nginx: latest
-          ports:
-          -ContainerPort: 80
-          volumeMounts:
-          -name: config-volume
-           mountPath: /etc/nginx/nginx.conf
-           subpath: nginx.conf
+         - name: nginx
+           image: nginx: latest
+           ports:
+           -ContainerPort: 80
+            volumeMounts:
+           -name: config-volume
+            mountPath: /etc/nginx/nginx.conf
+            subpath: nginx.conf
          
          volumes:
-         -name: config-volume
+         - name: config-volume
           configMap:
             name: nginx-config
