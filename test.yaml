@@ -1,0 +1,40 @@
+apiversion: apps/v1
+kind: Deployment
+metadata:
+  name:ngix-deployment
+  labels:
+    app:nginx
+spec:
+  replicas:2
+  selector:
+     matchLabels:
+       app:nginx
+   template:
+     metadata:
+       labels:
+         app:nginx
+     spec:
+       affinity:
+         podAffinity:
+           requiredDuringSchedlulingIgnoreDuringExection:
+             -labelSelector:
+                matchExpressions:
+                 -key: app
+                  operator: In
+                  values:
+                  -nginx
+               topologykey: kubernetes.io/hostname
+         Containers:
+         -name: nginx
+          image: nginx: latest
+          ports:
+          -ContainerPort: 80
+          volumeMounts:
+          -name: config-volume
+           mountPath: /etc/nginx/nginx.conf
+           subpath: nginx.conf
+         
+         volumes:
+         -name: config-volume
+          configMap:
+            name: nginx-config
