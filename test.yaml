@@ -25,14 +25,14 @@ spec:
                   -nginx
                 topologyKey: kubernetes.io/hostname
         containers:
-         - name: nginx
-           image: nginx: latest
-           ports:
-           -containerPort: 80
+        - name: nginx
+          image: nginx: latest
+          ports:
+           - containerPort: 80
             volumeMounts:
-           -name: config-volume
-            mountPath: /etc/nginx/nginx.conf
-            subpath: nginx.conf
+            - name: config-volume
+              mountPath: /etc/nginx/nginx.conf
+              subpath: nginx.conf
          
          volumes:
          - name: config-volume
