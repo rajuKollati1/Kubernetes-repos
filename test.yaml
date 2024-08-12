@@ -28,13 +28,13 @@ spec:
         - name: nginx
           image: nginx: latest
           ports:
-           - containerPort: 80
-            volumeMounts:
-            - name: config-volume
-              mountPath: /etc/nginx/nginx.conf
-              subpath: nginx.conf
+          - containerPort: 80
+          volumeMounts:
+          - name: config-volume
+            mountPath: /etc/nginx/nginx.conf
+            subpath: nginx.conf
          
          volumes:
          - name: config-volume
-          configMap:
-            name: nginx-config
+           configMap:
+           name: nginx-config
