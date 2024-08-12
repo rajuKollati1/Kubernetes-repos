@@ -17,12 +17,12 @@ spec:
        affinity:
           podAffinity:
             requiredDuringSchedlulingIgnoreDuringExection:
-              -labelSelector:
+            - labelSelector:
                  matchExpressions:
                  - key: app
-                  operator: In
-                  values:
-                  -nginx
+                   operator: In
+                   values:
+                   - nginx
                 topologyKey: kubernetes.io/hostname
         containers:
         - name: nginx
