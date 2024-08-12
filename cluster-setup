@@ -2,16 +2,15 @@
 
 # Variables
 PROJECT_ID="golden-totality-429517-s7"
-COMPUTE_ZONE="us-central1-a"
-CLUSTER_NAME="rk-cluster002"
+COMPUTE_ZONE="asia-east1-a"
+CLUSTER_NAME="rk-cluster-01"
 NUM_NODES=2
-NODE_NAME_PREFIX="rk-node001"
+NODE_NAME_PREFIX="rk-node-01"
 MACHINE_TYPE="e2-medium"
-VPC_NAME="rk-myvpc"
-SUBNET_NAME="rk-subnet001"
-NETWORK_RANGE="10.15.0.0/16"
-REGION="us-central1"
-NODE_LABEL="namespace=rk-lable-nodes01"
+VPC_NAME="my-vpc001"
+SUBNET_NAME="my-vpc001"
+REGION="asia-east1"
+NODE_LABEL="namespace=rk-lable-node-01"
 MAX_PODS_PER_NODE=80  # Define the maximum number of pods per node
 
 # Set the project
