@@ -9,17 +9,17 @@ spec:
   selector:
     matchLabels:
       app: nginx
-   template:
+  template:
      metadata:
        labels:
          app: nginx
-     spec:
-       affinity:
+    spec:
+      affinity:
          podAffinity:
            requiredDuringSchedlulingIgnoreDuringExection:
              -labelSelector:
                 matchExpressions:
-                 -key: app
+                - key: app
                   operator: In
                   values:
                   -nginx
