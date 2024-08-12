@@ -2,13 +2,11 @@ apiVersion: v1
 kind: Service
 metadata:
   name: nginx-service
-  labels:
-    app: nginx
 spec:
   selector:
     app: nginx
   ports:
-  - protocol: TCP
-    port: 80
-    targetPort: 80
-  type: ClusterIP
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: LoadBalancer  # For cloud providers, or use NodePort for local clusters
