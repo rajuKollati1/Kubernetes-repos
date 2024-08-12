@@ -13,18 +13,18 @@ spec:
      metadata:
        labels:
          app: nginx
-    spec:
-      affinity:
-         podAffinity:
-           requiredDuringSchedlulingIgnoreDuringExection:
-             -labelSelector:
-                matchExpressions:
-                - key: app
+     spec:
+       affinity:
+          podAffinity:
+            requiredDuringSchedlulingIgnoreDuringExection:
+              -labelSelector:
+                 matchExpressions:
+                 - key: app
                   operator: In
                   values:
                   -nginx
-               topologyKey: kubernetes.io/hostname
-         containers:
+                topologyKey: kubernetes.io/hostname
+        containers:
          - name: nginx
            image: nginx: latest
            ports:
