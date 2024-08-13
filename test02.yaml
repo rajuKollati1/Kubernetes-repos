@@ -1,39 +1,29 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-deployment
+  name: httpd-deployment
   labels:
-    app: nginx
+    app: httpd
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: nginx
+      app: httpd
   template:
     metadata:
       labels:
-        app: nginx
+        app: httpd
     spec:
-      affinity:
-        podAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            - labelSelector:
-                matchExpressions:
-                  - key: app
-                    operator: In
-                    values:
-                      - nginx
-              topologyKey: kubernetes.io/hostname
       containers:
-        - name: nginx
-          image: nginx:latest
+        - name: httpd
+          image: httpd:latest
           ports:
             - containerPort: 80
           volumeMounts:
             - name: config-volume
-              mountPath: /etc/nginx/nginx.conf
-              subPath: nginx.conf
+              mountPath: /usr/local/apache2/conf/httpd.conf
+              subPath: httpd.conf
       volumes:
         - name: config-volume
           configMap:
-            name: nginx-config
+            name: httpd-config
