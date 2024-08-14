@@ -1,4 +1,29 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-   name: http-dep;
+   name: httpd-deployment
+   labels:
+     app: httpd
+spec:
+   replicas: 2
+   selector:
+     matchLabels:
+       app: httpd
+   template:
+     metadata:
+       labels:
+          app: httpd
+   spec:
+    containers:
+     - name: http
+       image: http:lastest 
+       ports:
+        - containerPort: 80
+       volumeMounts:
+        - name: config-volume
+          mouthPath: /user/local/apche2/conf/http.conf
+          subPath: httpd.conf
+   volumes:
+     - name: config-volume
+       configMap: 
+         name: httpd-cofig
