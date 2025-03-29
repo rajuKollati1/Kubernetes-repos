@@ -141,6 +141,22 @@ sudo kubeadm join 192.168.0.145:6443 --token oxyhkk.dx8eax997v35znqs \
     --discovery-token-ca-cert-hash sha256:add30507d4e43195b73901ea34ff61e6563e0c94364cd2bdcb6
 
 
+Fix: Disable Swap
+Run the following commands:
+
+
+
+
+# Turn off swap immediately
+sudo swapoff -a
+
+# Remove any swap entries from /etc/fstab (to prevent it from re-enabling on reboot)
+sudo sed -i '/ swap / s/^/#/' /etc/fstab
+
+# Verify swap is disabled
+free -h
+
+
 
 
 
