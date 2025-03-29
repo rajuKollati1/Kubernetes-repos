@@ -108,6 +108,38 @@ kubectl get nodes
 # Check if system pods are running
 kubectl get pods -n kube-system
 
+🛠 Steps to Fix the Worker Node Join Issue
+1️⃣ Reset the Worker Node
+Since Kubernetes files already exist, we need to reset the node before joining. Run the following on the worker node:
+
+bash
+Copy
+Edit
+sudo kubeadm reset -f
+🔹 This will remove any previous configurations.
+
+2️⃣ Clean Up Kubernetes Directories
+After resetting, delete any leftover Kubernetes files:
+
+bash
+Copy
+Edit
+sudo rm -rf /etc/kubernetes /var/lib/kubelet /var/lib/etcd /var/lib/cni /var/run/kubernetes
+Then restart the kubelet service:
+
+bash
+Copy
+Edit
+sudo systemctl restart kubelet
+3️⃣ Rejoin the Worker Node
+Now, run the join command again:
+
+bash
+Copy
+Edit
+sudo kubeadm join 192.168.0.145:6443 --token oxyhkk.dx8eax997v35znqs \
+    --discovery-token-ca-cert-hash sha256:add30507d4e43195b73901ea34ff61e6563e0c94364cd2bdcb6
+
 
 
 
