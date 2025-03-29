@@ -141,9 +141,8 @@ sudo kubeadm join 192.168.0.145:6443 --token oxyhkk.dx8eax997v35znqs \
     --discovery-token-ca-cert-hash sha256:add30507d4e43195b73901ea34ff61e6563e0c94364cd2bdcb6
 
 
-Fix: Disable Swap
-Run the following commands:
 
+# AFter reboot your node vms you have to follow this
 
 
 
