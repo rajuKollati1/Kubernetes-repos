@@ -1,11 +1,13 @@
+# install ssh adn enable 
+
 sudo apt update
 sudo apt install -y openssh-server
 
 sudo systemctl enable ssh
 sudo systemctl start ssh
-
-
 sudo systemctl status ssh
+
+# check firewall
 
 if want
 sudo ufw allow ssh
@@ -13,14 +15,8 @@ sudo ufw enable
 sudo ufw status
 
 
-
-🔄 Step 1: Remove Old Kubernetes & Docker Configurations
+# Step 1: Remove Old Kubernetes & Docker Configurations
 If you've previously attempted to install Kubernetes, clean up old files to avoid conflicts:
-
-bash
-Copy
-Edit
-# Remove old Kubernetes packages
 sudo apt-get remove -y kubeadm kubelet kubectl containerd.io docker.io docker-ce docker-ce-cli
 
 # Delete Kubernetes configuration directories
@@ -38,18 +34,17 @@ sudo systemctl daemon-reload
 # Remove old container runtime configurations (if any)
 sudo rm -rf /etc/containerd /var/lib/containerd
 🚀 Step 2: Install Dependencies
-bash
-Copy
-Edit
+
+
+
 # Update package list
 sudo apt update
 
 # Install required packages
 sudo apt install -y apt-transport-https ca-certificates curl gpg
 📦 Step 3: Install & Configure Container Runtime (containerd)
-bash
-Copy
-Edit
+
+
 # Install containerd
 sudo apt install -y containerd
 
@@ -63,10 +58,12 @@ sudo sed -i 's/SystemdCgroup = false/SystemdCgroup = true/' /etc/containerd/conf
 # Restart containerd service
 sudo systemctl restart containerd
 sudo systemctl enable containerd
+
+
+
+
 🔑 Step 4: Add the Official Kubernetes Repository
-bash
-Copy
-Edit
+
 # Create directory for Kubernetes keyrings
 sudo mkdir -p /etc/apt/keyrings
 
@@ -78,39 +75,33 @@ echo "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.
 
 # Update package list
 sudo apt update
-🔧 Step 5: Install Kubernetes Components
-bash
-Copy
-Edit
+
+# Step 5: Install Kubernetes Components
+
 # Install a specific version of kubeadm, kubelet, and kubectl
 sudo apt install -y kubeadm=1.29.9-1.1 kubelet=1.29.9-1.1 kubectl=1.29.9-1.1
 
 # Prevent automatic updates to these packages
 sudo apt-mark hold kubelet kubeadm kubectl
 🛠 Step 6: Initialize the Kubernetes Cluster (Master Node)
-bash
-Copy
-Edit
+
 # Initialize Kubernetes master node with a default pod network (Flannel)
 sudo kubeadm init --pod-network-cidr=10.244.0.0/16
 🔗 Step 7: Set Up kubectl for the Current User
-bash
-Copy
-Edit
+
+
 # Set up kubeconfig for the current user
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
-🌐 Step 8: Deploy a Network Plugin (Flannel)
-bash
-Copy
-Edit
+### Step 8: Deploy a Network Plugin (Flannel)
+
 # Install Flannel CNI for networking
 kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+
+
 ✅ Final Verification
-bash
-Copy
-Edit
+
 # Check if the node is ready
 kubectl get nodes
 
