@@ -156,6 +156,174 @@ sudo sed -i '/ swap / s/^/#/' /etc/fstab
 free -h
 
 
+✅ Step-by-Step: Set Up GitHub Self-Hosted Runner with k8s-m User
+1. Switch to k8s-m user
+bash
+Copy
+Edit
+su - k8s-m
+2. Create the actions-runner folder and download the runner
+bash
+Copy
+Edit
+mkdir -p ~/actions-runner && cd ~/actions-runner
+
+curl -o actions-runner-linux-x64-2.316.0.tar.gz -L \
+https://github.com/actions/runner/releases/download/v2.316.0/actions-runner-linux-x64-2.316.0.tar.gz
+
+tar xzf actions-runner-linux-x64-2.316.0.tar.gz
+3. Get your GitHub runner registration token
+Go to your GitHub repo:
+
+Click Settings → Actions → Runners
+
+Click "New self-hosted runner"
+
+Select Linux → x64
+
+It will show a command with your token. Use that in the next step.
+
+4. Register the runner
+bash
+Copy
+Edit
+./config.sh --url https://github.com/<your-username>/<your-repo> --token <your-token>
+Replace with your actual GitHub username/repo and token.
+
+5. Start the runner
+bash
+Copy
+Edit
+./run.sh
+You should now see:
+
+css
+Copy
+Edit
+√ Connected to GitHub
+Listening for Jobs
+🔁 Optional: Start the Runner as a Service
+To run it in background after reboots:
+
+bash
+Copy
+Edit
+sudo ./svc.sh install
+sudo ./svc.sh start
+Let me know if you want help generating the token or writing a simple test workflow to try it out 🚀
+
+
+
+
+
+# github runners 
+
+You said:
+what i need to do with 4th step
+
+
+ChatGPT said:
+Great question, Raju! Step 4 is where you register your self-hosted runner with your GitHub repository using a special token. Here's exactly what to do:
+
+✅ Step 4: Register Your Runner with GitHub
+🔹 1. Go to your GitHub repo in the browser
+For example:
+👉 https://github.com/rajuKollati1/your-repo-name
+
+Replace your-repo-name with the actual repo where you want the runner.
+
+🔹 2. Open the Runner setup page:
+Click on Settings (top-right of your repo)
+
+Scroll down to "Actions" → "Runners"
+
+Click “New self-hosted runner”
+
+Choose:
+
+OS: Linux
+
+Arch: x64
+
+🔹 3. Copy the config command from GitHub
+GitHub will give you something like this:
+
+bash
+Copy
+Edit
+./config.sh --url https://github.com/rajuKollati1/your-repo-name --token AABBBCCCDDDEEEFFF
+This command registers your runner with GitHub using a temporary token (valid for ~1 hour).
+Make sure you paste it into your terminal where you already did Step 3 (cd ~/actions-runner).
+
+🔹 4. Paste and run it on your k8s-m machine
+In your terminal:
+
+bash
+Copy
+Edit
+./config.sh --url https://github.com/rajuKollati1/your-repo-name --token YOUR_TOKEN_HERE
+GitHub will then ask:
+
+Runner name (press Enter to accept default)
+
+Work folder (press Enter to accept default)
+
+✅ Once it’s registered:
+Then just start the runner:
+
+bash
+Copy
+Edit
+./run.sh
+Let me know if you want help creating a test workflow that will use this runner!
+
+
+
+
+
+
+
+You said:
+./config.sh --url https://github.com/rajuKollati1/TestTest --token A7AB2HQMKFX3JTHPHQGAA7TH6F7CG
+
+
+ChatGPT said:
+Perfect, Raju! You're right on track 🎯
+
+Now, just follow these steps after running that ./config.sh command:
+
+✅ After You Run ./config.sh:
+You'll be prompted with a few setup questions in the terminal:
+
+Enter name of the runner
+You can press Enter to accept the default name (usually your hostname), or type something like k8s-runner.
+
+Enter work folder
+Just press Enter again to accept the default (_work).
+
+Once done, you’ll see something like:
+
+css
+Copy
+Edit
+√ Connected to GitHub
+√ Successfully added the runner
+✅ Then Start the Runner
+After registration is complete:
+
+bash
+Copy
+Edit
+./run.sh
+You should see:
+
+css
+Copy
+Edit
+√ Connected to GitHub
+2024-04-05 15:40:59Z: Listening for Jobs
+That means your runner is live and waiting for GitHub Actions jobs! 🟢
+
 
 
 
