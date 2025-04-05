@@ -326,4 +326,15 @@ That means your runner is live and waiting for GitHub Actions jobs! 🟢
 
 
 
+# To reduce the need to set KUBECONFIG every time, you can also copy the config permanently to the default location:
+
+bash
+Copy
+Edit
+mkdir -p $HOME/.kube
+sudo cp /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+
+
 
