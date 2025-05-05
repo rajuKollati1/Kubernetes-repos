@@ -1,0 +1,2 @@
+sudo mount -t cifs //192.168.0.171/k8s-share /mnt/k8s-share \
+-o username=es,password='Ra!u@988588',uid=1000,gid=1000,vers=3.0
